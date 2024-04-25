@@ -3,7 +3,7 @@ using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Diagnostics;
 
-MenuOpen();
+OpenMenu();
 
 static int ReadNumber(string interfaceString)
 {
@@ -25,7 +25,7 @@ static int ReadNumber(string interfaceString)
     return number;
 }
 
-static void Calculator()
+static void Calculate()
 {
     var num1 = ReadNumber("Enter first number:");
 
@@ -77,7 +77,7 @@ static void PrintMenu(MenuOptions selectedOption)
     Console.WriteLine(selectedOption == MenuOptions.Quit ? $"{InterfaceItems.Arrow} {MenuOptions.Quit}" : $"    {MenuOptions.Quit}");
 }
 
-static void MenuOpen()
+static void OpenMenu()
 {
     MenuOptions selectedOption = MenuOptions.Calculator;
     PrintMenu(selectedOption);
@@ -106,7 +106,7 @@ static void MenuOpen()
             do
             {
                 Console.Clear();
-                Calculator();
+                Calculate();
                 Console.WriteLine("Do you want to do a new operation? y/n");
                 continueCalcOperation = Console.ReadLine();
             } while (continueCalcOperation == "y");
@@ -114,7 +114,7 @@ static void MenuOpen()
             if (continueCalcOperation == "n")
             {
                 Console.Clear();
-                MenuOpen();
+                OpenMenu();
             }
         }
         else if (selectedOption == MenuOptions.StringReverse && keyInfo.Key == ConsoleKey.Enter)
@@ -138,7 +138,7 @@ static void MenuOpen()
             if (continueRevOperation == "n")
             {
                 Console.Clear();
-                MenuOpen();
+                OpenMenu();
             }
         }
         else if (selectedOption == MenuOptions.Quit && keyInfo.Key == ConsoleKey.Enter)
