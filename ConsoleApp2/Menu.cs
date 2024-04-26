@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp2
 {
-    internal class Menu
+    public class Menu
     {
         public static void PrintMenu(MenuOptions selectedOption)
         {
@@ -16,24 +16,60 @@ namespace ConsoleApp2
             Console.WriteLine(selectedOption == MenuOptions.StringReverse ? $"{InterfaceItems.Arrow} {MenuOptions.StringReverse}" : $"    {MenuOptions.StringReverse}");
             Console.WriteLine(selectedOption == MenuOptions.Quit ? $"{InterfaceItems.Arrow} {MenuOptions.Quit}" : $"    {MenuOptions.Quit}");
         }
-        private static ConsoleKeyInfo GetUserInput()
+        public static ConsoleKeyInfo GetUserInput()
         {
             return Console.ReadKey();
         }
 
-        private static MenuOptions ChangeMenuOption(ConsoleKeyInfo keyInfo, MenuOptions selectedOption)
+        public static MenuOptions ChangeMenuOption(ConsoleKeyInfo keyInfo, MenuOptions selectedOption)
         {
-            switch (keyInfo.Key)
+            return keyInfo.Key switch
             {
-                case ConsoleKey.DownArrow:
-                    return (MenuOptions)Math.Min((int)selectedOption + 1, 3);
-                    break;
-                case ConsoleKey.UpArrow:
-                    return (MenuOptions)Math.Min((int)selectedOption - 1, 3);
-                    break;
-                default:
-                    return selectedOption;
-                    break;
+                ConsoleKey.DownArrow => (MenuOptions)Math.Min((int)selectedOption + 1, 3),
+                ConsoleKey.UpArrow => (MenuOptions)Math.Min((int)selectedOption - 1, 3),
+                _ => selectedOption
+            };
+        }
+
+        public static void ExecuteCalculatorOption()
+        {
+            string continueCalcOperation;
+            do
+            {
+                Calculator.Calculate();
+                Console.WriteLine(InterfaceItems.continueCalc);
+                continueCalcOperation = Console.ReadLine();
+            } while (continueCalcOperation == InterfaceItems.agreeToContinue);
+
+            if (continueCalcOperation == InterfaceItems.cancelOperation)
+            {
+                Console.Clear();
+                OpenMenu();
+            }
+        }
+
+        public static void ExecuteReverseStrOption()
+        {
+            string continueRevOperation;
+
+            do
+            {
+                Console.Clear();
+                Console.WriteLine(InterfaceItems.getReverseString);
+
+                var enteredString = Console.ReadLine();
+                var enteredStringConverted = enteredString.Select(char.ToString).ToArray();
+
+                StringReverser.ReverseString(enteredStringConverted);
+                Console.WriteLine(InterfaceItems.continueReverse);
+
+                continueRevOperation = Console.ReadLine();
+            } while (continueRevOperation == InterfaceItems.agreeToContinue);
+
+            if (continueRevOperation == InterfaceItems.cancelOperation)
+            {
+                Console.Clear();
+                OpenMenu();
             }
         }
 
@@ -56,43 +92,11 @@ namespace ConsoleApp2
 
                     if (selectedOption == MenuOptions.Calculator)
                     {
-                        string continueCalcOperation;
-                        do
-                        {
-                            Calculator.Calculate();
-                            Console.WriteLine(InterfaceItems.continueCalc);
-                            continueCalcOperation = Console.ReadLine();
-                        } while (continueCalcOperation == "y");
-
-                        if (continueCalcOperation == "n")
-                        {
-                            Console.Clear();
-                            OpenMenu();
-                        }
+                        ExecuteCalculatorOption();
                     }
                     else if (selectedOption == MenuOptions.StringReverse)
                     {
-                        string continueRevOperation;
-
-                        do
-                        {
-                            Console.Clear();
-                            Console.WriteLine(InterfaceItems.getReverseString);
-
-                            var enteredString = Console.ReadLine();
-                            var enteredStringConverted = enteredString.Select(char.ToString).ToArray();
-
-                            StringReverser.ReverseString(enteredStringConverted);
-                            Console.WriteLine(InterfaceItems.continueReverse);
-
-                            continueRevOperation = Console.ReadLine();
-                        } while (continueRevOperation == "y");
-
-                        if (continueRevOperation == "n")
-                        {
-                            Console.Clear();
-                            OpenMenu();
-                        }
+                        ExecuteReverseStrOption();
                     }
                     else if (selectedOption == MenuOptions.Quit)
                     {

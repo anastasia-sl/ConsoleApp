@@ -38,28 +38,16 @@ namespace ConsoleApp2
 
             var num2 = ReadNumber("Enter second number:");
 
-            switch (operation)
+            var result = operation switch
             {
-                case "+":
-                    var result = num1 + num2;
-                    Console.WriteLine(result);
-                    break;
-                case "-":
-                    result = num1 - num2;
-                    Console.WriteLine(result);
-                    break;
-                case "*":
-                    result = num1 * num2;
-                    Console.WriteLine(result);
-                    break;
-                case "/":
-                    result = num1 / num2;
-                    Console.WriteLine(result);
-                    break;
-                default:
-                    Console.WriteLine("Select operation");
-                    break;
-            }
+                "+" => (num1 + num2).ToString(),
+                "-" => (num1 - num2).ToString(),
+                "*" => (num1 * num2).ToString(),
+                "/" => (num1 / num2).ToString(),
+                _ => "Invalid operation"
+            };
+
+            Console.WriteLine(result);
         }
     }
 }
