@@ -97,7 +97,6 @@ namespace ConsoleApp2
                     {
                         case MenuOptions.Calculator:
                             ExecuteCalculatorOption();
-
                             break;
                         case MenuOptions.StringReverse:
                             ExecuteReverseStrOption();
