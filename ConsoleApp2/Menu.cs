@@ -23,17 +23,17 @@ namespace ConsoleApp2
 
         private static MenuOptions ChangeMenuOption(ConsoleKeyInfo keyInfo, MenuOptions selectedOption)
         {
-            if (keyInfo.Key == ConsoleKey.DownArrow)
+            switch (keyInfo.Key)
             {
-                return (MenuOptions)Math.Min((int)selectedOption + 1, 3);
-            }
-            else if (keyInfo.Key == ConsoleKey.UpArrow)
-            {
-                return (MenuOptions)Math.Min((int)selectedOption - 1, 3);
-            }
-            else
-            {
-                return selectedOption;
+                case ConsoleKey.DownArrow:
+                    return (MenuOptions)Math.Min((int)selectedOption + 1, 3);
+                    break;
+                case ConsoleKey.UpArrow:
+                    return (MenuOptions)Math.Min((int)selectedOption - 1, 3);
+                    break;
+                default:
+                    return selectedOption;
+                    break;
             }
         }
 
@@ -60,7 +60,7 @@ namespace ConsoleApp2
                         do
                         {
                             Calculator.Calculate();
-                            Console.WriteLine("Do you want to do a new operation? y/n");
+                            Console.WriteLine(InterfaceItems.continueCalc);
                             continueCalcOperation = Console.ReadLine();
                         } while (continueCalcOperation == "y");
 
@@ -77,13 +77,13 @@ namespace ConsoleApp2
                         do
                         {
                             Console.Clear();
-                            Console.WriteLine("What string you want to reverse?");
+                            Console.WriteLine(InterfaceItems.getReverseString);
 
                             var enteredString = Console.ReadLine();
                             var enteredStringConverted = enteredString.Select(char.ToString).ToArray();
 
                             StringReverser.ReverseString(enteredStringConverted);
-                            Console.WriteLine("Do you want to try again? y/n");
+                            Console.WriteLine(InterfaceItems.continueReverse);
 
                             continueRevOperation = Console.ReadLine();
                         } while (continueRevOperation == "y");

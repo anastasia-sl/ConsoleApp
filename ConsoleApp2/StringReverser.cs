@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp2
 {
-    internal class StringReverser
+    public class StringReverser
     {
         public static void ReverseString(string[] arr)
         {

@@ -4,9 +4,9 @@ using System;
 using System.Diagnostics;
 
 Menu.OpenMenu();
-enum MenuOptions
-{
-    Calculator = 1,
-    StringReverse,
-    Quit
-}
+//enum MenuOptions
+//{
+//    Calculator = 1,
+//    StringReverse,
+//    Quit
+//}

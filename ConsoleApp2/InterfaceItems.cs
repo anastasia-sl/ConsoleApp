@@ -9,8 +9,8 @@ namespace ConsoleApp2
     internal class InterfaceItems
     {
         public const string Arrow = "->";
-        public const string calcMenuOption = "Calculator";
-        public const string strRevMenuOption = "String Reverse";
-        public const string quitMenuOption = "Quit";
+        public const string continueCalc = "Do you want to do a new operation? y/n";
+        public const string getReverseString = "What string you want to reverse?";
+        public const string continueReverse = "Do you want to try again? y/n";
     }
 }

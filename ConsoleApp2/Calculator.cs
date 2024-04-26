@@ -16,7 +16,7 @@ namespace ConsoleApp2
             do
             {
                 Console.WriteLine(interfaceString);
-                string inputNumber = Console.ReadLine();
+                var inputNumber = Console.ReadLine();
                 isParsedSuccessfully = int.TryParse(inputNumber, out number);
 
                 if (!isParsedSuccessfully)
