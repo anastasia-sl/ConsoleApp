@@ -10,12 +10,17 @@ namespace ConsoleApp2
     {
         public static void PrintMenu(MenuOptions selectedOption)
         {
-            Console.WriteLine("MENU:");
+            Console.WriteLine(InterfaceItems.MenuStr);
 
-            Console.WriteLine(selectedOption == MenuOptions.Calculator ? $"{InterfaceItems.Arrow} {MenuOptions.Calculator}" : $"    {MenuOptions.Calculator}");
-            Console.WriteLine(selectedOption == MenuOptions.StringReverse ? $"{InterfaceItems.Arrow} {MenuOptions.StringReverse}" : $"    {MenuOptions.StringReverse}");
-            Console.WriteLine(selectedOption == MenuOptions.Quit ? $"{InterfaceItems.Arrow} {MenuOptions.Quit}" : $"    {MenuOptions.Quit}");
+            var selectedCalculatorOption = $"{InterfaceItems.Arrow} {MenuOptions.Calculator}";
+            var selectedStrReverseOption = $"{InterfaceItems.Arrow} {MenuOptions.Calculator}";
+            var selectedQuitOption = $"{InterfaceItems.Arrow} {MenuOptions.Calculator}";
+
+            Console.WriteLine(selectedOption == MenuOptions.Calculator ? selectedCalculatorOption : $"    {MenuOptions.Calculator}");
+            Console.WriteLine(selectedOption == MenuOptions.StringReverse ? selectedStrReverseOption : $"    {MenuOptions.StringReverse}");
+            Console.WriteLine(selectedOption == MenuOptions.Quit ? selectedQuitOption : $"    {MenuOptions.Quit}");
         }
+
         public static ConsoleKeyInfo GetUserInput()
         {
             return Console.ReadKey();
@@ -23,12 +28,22 @@ namespace ConsoleApp2
 
         public static MenuOptions ChangeMenuOption(ConsoleKeyInfo keyInfo, MenuOptions selectedOption)
         {
+            var optionsCount = Enum.GetNames(typeof(MenuOptions)).Length;
+
             return keyInfo.Key switch
             {
-                ConsoleKey.DownArrow => (MenuOptions)Math.Min((int)selectedOption + 1, 3),
-                ConsoleKey.UpArrow => (MenuOptions)Math.Min((int)selectedOption - 1, 3),
+                ConsoleKey.DownArrow => (MenuOptions)Math.Min((int)selectedOption + 1, optionsCount),
+                ConsoleKey.UpArrow => (MenuOptions)Math.Min((int)selectedOption - 1, optionsCount),
                 _ => selectedOption
             };
+        }
+        public static void ContinueOperation(string operationResult)
+        {
+            if (operationResult == InterfaceItems.CancelOperation)
+            {
+                Console.Clear();
+                OpenMenu();
+            }
         }
 
         public static void ExecuteCalculatorOption()
@@ -37,11 +52,11 @@ namespace ConsoleApp2
             do
             {
                 Calculator.Calculate();
-                Console.WriteLine(InterfaceItems.continueCalc);
+                Console.WriteLine(InterfaceItems.ContinueCalc);
                 continueCalcOperation = Console.ReadLine();
-            } while (continueCalcOperation == InterfaceItems.agreeToContinue);
+            } while (continueCalcOperation == InterfaceItems.AgreeToContinue);
 
-            if (continueCalcOperation == InterfaceItems.cancelOperation)
+            if (continueCalcOperation == InterfaceItems.CancelOperation)
             {
                 Console.Clear();
                 OpenMenu();
@@ -55,18 +70,18 @@ namespace ConsoleApp2
             do
             {
                 Console.Clear();
-                Console.WriteLine(InterfaceItems.getReverseString);
+                Console.WriteLine(InterfaceItems.GetReverseString);
 
                 var enteredString = Console.ReadLine();
                 var enteredStringConverted = enteredString.Select(char.ToString).ToArray();
 
                 StringReverser.ReverseString(enteredStringConverted);
-                Console.WriteLine(InterfaceItems.continueReverse);
+                Console.WriteLine(InterfaceItems.ContinueReverse);
 
                 continueRevOperation = Console.ReadLine();
-            } while (continueRevOperation == InterfaceItems.agreeToContinue);
+            } while (continueRevOperation == InterfaceItems.AgreeToContinue);
 
-            if (continueRevOperation == InterfaceItems.cancelOperation)
+            if (continueRevOperation == InterfaceItems.CancelOperation)
             {
                 Console.Clear();
                 OpenMenu();
@@ -105,6 +120,5 @@ namespace ConsoleApp2
                 }
             }
         }
-
     }
 }

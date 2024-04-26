@@ -21,7 +21,7 @@ namespace ConsoleApp2
 
                 if (!isParsedSuccessfully)
                 {
-                    Console.WriteLine("Invalid input");
+                    Console.WriteLine(CalcInterfaceItems.WrongInputWarning);
                 }
             } while (!isParsedSuccessfully);
 
@@ -30,21 +30,21 @@ namespace ConsoleApp2
 
         public static void Calculate()
         {
-            var num1 = ReadNumber("Enter first number:");
+            var num1 = ReadNumber(CalcInterfaceItems.GetFirstNumber);
 
-            Console.WriteLine("Enter operation:");
+            Console.WriteLine(CalcInterfaceItems.GetOperation);
 
             var operation = Console.ReadLine();
 
-            var num2 = ReadNumber("Enter second number:");
+            var num2 = ReadNumber(CalcInterfaceItems.GetSecondNumber);
 
             var result = operation switch
             {
-                "+" => (num1 + num2).ToString(),
-                "-" => (num1 - num2).ToString(),
-                "*" => (num1 * num2).ToString(),
-                "/" => (num1 / num2).ToString(),
-                _ => "Invalid operation"
+                CalcOperationOptions.Addition => (num1 + num2).ToString(),
+                CalcOperationOptions.Subtraction => (num1 - num2).ToString(),
+                CalcOperationOptions.Multiplication => (num1 * num2).ToString(),
+                CalcOperationOptions.Division => (num1 / num2).ToString(),
+                _ => CalcInterfaceItems.WrongOperationWarning
             };
 
             Console.WriteLine(result);
