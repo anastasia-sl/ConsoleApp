@@ -12,13 +12,9 @@ namespace ConsoleApp2
         {
             Console.WriteLine(InterfaceItems.MenuStr);
 
-            var selectedCalculatorOption = $"{InterfaceItems.Arrow} {MenuOptions.Calculator}";
-            var selectedStrReverseOption = $"{InterfaceItems.Arrow} {MenuOptions.Calculator}";
-            var selectedQuitOption = $"{InterfaceItems.Arrow} {MenuOptions.Calculator}";
-
-            Console.WriteLine(selectedOption == MenuOptions.Calculator ? selectedCalculatorOption : $"    {MenuOptions.Calculator}");
-            Console.WriteLine(selectedOption == MenuOptions.StringReverse ? selectedStrReverseOption : $"    {MenuOptions.StringReverse}");
-            Console.WriteLine(selectedOption == MenuOptions.Quit ? selectedQuitOption : $"    {MenuOptions.Quit}");
+            Console.WriteLine($"{(selectedOption == MenuOptions.Calculator ? $"{InterfaceItems.Arrow} " : $"    ")} {MenuOptions.Calculator}");
+            Console.WriteLine($"{(selectedOption == MenuOptions.StringReverse ? $"{InterfaceItems.Arrow} " : $"    ")} {MenuOptions.StringReverse}");
+            Console.WriteLine($"{(selectedOption == MenuOptions.Quit ? $"{InterfaceItems.Arrow} " : $"    ")} {MenuOptions.Quit}");
         }
 
         public static ConsoleKeyInfo GetUserInput()
@@ -36,14 +32,6 @@ namespace ConsoleApp2
                 ConsoleKey.UpArrow => (MenuOptions)Math.Min((int)selectedOption - 1, optionsCount),
                 _ => selectedOption
             };
-        }
-        public static void ContinueOperation(string operationResult)
-        {
-            if (operationResult == InterfaceItems.CancelOperation)
-            {
-                Console.Clear();
-                OpenMenu();
-            }
         }
 
         public static void ExecuteCalculatorOption()
@@ -105,18 +93,19 @@ namespace ConsoleApp2
                 {
                     Console.Clear();
 
-                    if (selectedOption == MenuOptions.Calculator)
+                    switch(selectedOption)
                     {
-                        ExecuteCalculatorOption();
-                    }
-                    else if (selectedOption == MenuOptions.StringReverse)
-                    {
-                        ExecuteReverseStrOption();
-                    }
-                    else if (selectedOption == MenuOptions.Quit)
-                    {
-                        return;
-                    }
+                        case MenuOptions.Calculator:
+                            ExecuteCalculatorOption();
+
+                            break;
+                        case MenuOptions.StringReverse:
+                            ExecuteReverseStrOption();
+                            break;
+                        case MenuOptions.Quit:
+                            Environment.Exit(0);
+                            break;
+                    };
                 }
             }
         }
