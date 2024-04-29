@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ConsoleApp2
+﻿namespace ConsoleApp2
 {
     public class Menu
     {
-        public static void PrintMenu(MenuOptions selectedOption)
+        private static void PrintMenu(MenuOptions selectedOption)
         {
             Console.WriteLine(InterfaceItems.MenuStr);
 
@@ -17,12 +11,7 @@ namespace ConsoleApp2
             Console.WriteLine($"{(selectedOption == MenuOptions.Quit ? $"{InterfaceItems.Arrow} " : $"    ")} {MenuOptions.Quit}");
         }
 
-        public static ConsoleKeyInfo GetUserInput()
-        {
-            return Console.ReadKey();
-        }
-
-        public static MenuOptions ChangeMenuOption(ConsoleKeyInfo keyInfo, MenuOptions selectedOption)
+        private static MenuOptions ChangeMenuOption(ConsoleKeyInfo keyInfo, MenuOptions selectedOption)
         {
             var optionsCount = Enum.GetNames(typeof(MenuOptions)).Length;
 
@@ -34,7 +23,7 @@ namespace ConsoleApp2
             };
         }
 
-        public static void ExecuteCalculatorOption()
+        private static void ExecuteCalculatorOption()
         {
             string continueCalcOperation;
             do
@@ -51,7 +40,7 @@ namespace ConsoleApp2
             }
         }
 
-        public static void ExecuteReverseStrOption()
+        private static void ExecuteReverseStrOption()
         {
             string continueRevOperation;
 
@@ -83,7 +72,7 @@ namespace ConsoleApp2
 
             while (true)
             {
-                ConsoleKeyInfo keyInfo = GetUserInput();
+                ConsoleKeyInfo keyInfo =  Console.ReadKey();
                 selectedOption = ChangeMenuOption(keyInfo, selectedOption);
 
                 Console.Clear();

@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ConsoleApp2
+﻿namespace ConsoleApp2
 {
-    internal class CalcInterfaceItems
+    public class CalcInterfaceItems
     {
         public const string WrongInputWarning = "Invalid input";
         public const string WrongOperationWarning = "Invalid operation";

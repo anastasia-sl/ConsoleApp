@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ConsoleApp2
+﻿namespace ConsoleApp2
 {
     public class Calculator
     {
-        public static int ReadNumber(string interfaceString)
+        private static int ReadNumber(string interfaceString)
         {
             int number;
             bool isParsedSuccessfully;
